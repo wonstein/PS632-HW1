@@ -71,9 +71,24 @@ def piglatin(txt):
   if isinstance(txt, str) == False:
     return ""
   
-  if txt == "test":
-    return "estte"
-  elif txt == "pig latin":
-    return "igpe atinle"
-    
-  raise NotImplementedError("Didn't quite finish this one....")
+  words = txt.split()
+  new_sentence = ''
+  
+  for word in words:
+    pl_word = ''
+    if word[0] == 'a' or word[0] == 'e' or word[0] == 'o' or word[0] == 'u' or word[0] == 'i':
+	  pl_word = word + 'way'
+    elif not(word[0] == 'a' or word[0] == 'e' or word[0] == 'o' or word[0] == 'u' or word[0] == 'i'):
+	  for letters in range(1, len(word)-1):
+	    if word[letters] == 'a' or word[letters] == 'e' or word[letters] == 'o' or word[letters] == 'u' or word[letters] == 'i':
+		  if word[letters+1] == 'a' or word[letters+1] == 'e' or word[letters+1] == 'o' or word[letters+1] == 'u' or word[letters+1] == 'i':
+		    pl_word = word[letters:len(word)] + word[0:letters] + 'ay'
+		    letters = len(word)
+		  elif not(word[letters+1] == 'a' or word[letters] == 'e' or word[letters] == 'o' or word[letters] == 'u' or word[letters] == 'i'):
+			pl_word = word[letters:len(word)] + word[0:letters] + 'ay'
+            letters = len(word)
+  
+    new_sentence += pl_word + ' '
+  
+  return ''.join(new_sentence)
+	
